@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Job | Corporate Job Portal</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #004aad;
+      --primary-dark: #003380;
+      --secondary: #ffd700;
+      --accent: #6c63ff;
+      --light: #f8f9fa;
+      --dark: #333;
+      --gray: #6c757d;
+      --success: #28a745;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--primary);
+      padding: 15px 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: #fff !important;
+      font-size: 1.5rem;
+    }
+
+    .navbar-brand span {
+      color: var(--secondary);
+    }
+
+    /* Add Job Section */
+    .add-job-section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-weight: 700;
+      margin-bottom: 40px;
+      color: var(--primary);
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 4px;
+      background: var(--secondary);
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--gray);
+      max-width: 700px;
+      margin: 0 auto 50px;
+      font-size: 1.1rem;
+    }
+
+    /* Job Form Card */
+    .job-form-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .form-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .form-icon i {
+      font-size: 2rem;
+      color: white;
+    }
+
+    .form-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .form-subtitle {
+      color: var(--gray);
+      font-size: 0.95rem;
+    }
+
+    /* Form Styles */
+    .form-label {
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .form-control, .form-select {
+      border-radius: 10px;
+      padding: 12px 15px;
+      border: 1px solid #e1e5ee;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.25rem rgba(0, 74, 173, 0.15);
+    }
+
+    .form-text {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-top: 5px;
+    }
+
+    /* Buttons */
+    .btn-submit {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 74, 173, 0.3);
+      width: 100%;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 74, 173, 0.4);
+    }
+
+    .btn-back {
+      background: white;
+      border: 1px solid #e1e5ee;
+      border-radius: 10px;
+      padding: 12px;
+      font-weight: 500;
+      color: var(--gray);
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .btn-back:hover {
+      background: #f8f9fa;
+      border-color: #d1d5db;
+    }
+
+    /* Character Counter */
+    .char-counter {
+      font-size: 0.8rem;
+      color: var(--gray);
+      text-align: right;
+      margin-top: 5px;
+    }
+
+    .char-counter.warning {
+      color: #ffc107;
+    }
+
+    .char-counter.danger {
+      color: #dc3545;
+    }
+
+    /* Preview Section */
+    .preview-section {
+      background: rgba(0, 74, 173, 0.05);
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 30px;
+      display: none;
+    }
+
+    .preview-title {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .preview-content {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--primary);
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    footer a {
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .job-form-card {
+        padding: 30px 20px;
+      }
+      
+      .form-icon {
+        width: 70px;
+        height: 70px;
+      }
+      
+      .form-icon i {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="admin-dashboard.html">
+        <img src="images/logo.png" alt="Logo" width="45" class="me-2" />
+        <span>Corp<span class="text-warning">Job</span> Admin</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Add Job Section -->
+  <section class="add-job-section">
+    <div class="container">
+      <h2 class="section-title">Post a New Job</h2>
+      <p class="section-subtitle">Fill out the form below to create a new job listing and reach qualified candidates.</p>
+      
+      <div class="job-form-card">
+        <div class="form-header">
+          <div class="form-icon">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <h3 class="form-title">Job Details</h3>
+          <p class="form-subtitle">Provide comprehensive information about the position to attract the right candidates.</p>
+        </div>
+
+        <form id="addJobForm">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Job Title <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="jobTitle" placeholder="e.g. Senior Frontend Developer" required>
+              <div class="form-text">Be specific about the role and seniority level.</div>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Company Name <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="companyName" placeholder="Your company name" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Job Type <span class="text-danger">*</span></label>
+              <select class="form-select" id="jobType" required>
+                <option value="" selected disabled>Select job type</option>
+                <option value="full-time">Full-time</option>
+                <option value="part-time">Part-time</option>
+                <option value="contract">Contract</option>
+                <option value="internship">Internship</option>
+                <option value="temporary">Temporary</option>
+                <option value="remote">Remote</option>
+              </select>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Experience Level <span class="text-danger">*</span></label>
+              <select class="form-select" id="experienceLevel" required>
+                <option value="" selected disabled>Select experience level</option>
+                <option value="entry">Entry Level</option>
+                <option value="mid">Mid Level</option>
+                <option value="senior">Senior Level</option>
+                <option value="lead">Lead</option>
+                <option value="executive">Executive</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Location <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="location" placeholder="e.g. New York, NY or Remote" required>
+              <div class="form-text">Specify city, state, or "Remote" for remote positions.</div>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Salary Range</label>
+              <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input type="text" class="form-control" id="salaryMin" placeholder="Min">
+                <span class="input-group-text">to</span>
+                <input type="text" class="form-control" id="salaryMax" placeholder="Max">
+                <select class="form-select" id="salaryPeriod" style="max-width: 120px;">
+                  <option value="year">/year</option>
+                  <option value="month">/month</option>
+                  <option value="hour">/hour</option>
+                </select>
+              </div>
+              <div class="form-text">Optional but recommended to attract more applicants.</div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Job Category <span class="text-danger">*</span></label>
+            <select class="form-select" id="jobCategory" required>
+              <option value="" selected disabled>Select a category</option>
+              <option value="technology">Technology</option>
+              <option value="marketing">Marketing</option>
+              <option value="sales">Sales</option>
+              <option value="design">Design</option>
+              <option value="finance">Finance</option>
+              <option value="hr">Human Resources</option>
+              <option value="operations">Operations</option>
+              <option value="healthcare">Healthcare</option>
+              <option value="education">Education</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Job Description <span class="text-danger">*</span></label>
+            <textarea class="form-control" id="jobDescription" rows="6" placeholder="Describe the role, responsibilities, and requirements..." required></textarea>
+            <div class="char-counter" id="descCounter">0/2000 characters</div>
+            <div class="form-text">Be detailed but concise. Include key responsibilities and qualifications.</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Requirements & Skills <span class="text-danger">*</span></label>
+            <textarea class="form-control" id="jobRequirements" rows="4" placeholder="List required skills, education, and experience..." required></textarea>
+            <div class="char-counter" id="reqCounter">0/1000 characters</div>
+            <div class="form-text">Separate skills with commas for better readability.</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Benefits & Perks</label>
+            <textarea class="form-control" id="jobBenefits" rows="3" placeholder="Health insurance, flexible hours, remote work options..."></textarea>
+            <div class="char-counter" id="benefitsCounter">0/500 characters</div>
+            <div class="form-text">Highlight what makes your company a great place to work.</div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Application Deadline</label>
+              <input type="date" class="form-control" id="applicationDeadline">
+              <div class="form-text">Leave blank if there's no specific deadline.</div>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+              <label class="form-label">How to Apply</label>
+              <select class="form-select" id="applicationMethod">
+                <option value="portal" selected>Through our portal</option>
+                <option value="email">Via email</option>
+                <option value="website">Company website</option>
+                <option value="other">Other method</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-4" id="applicationDetails" style="display: none;">
+            <label class="form-label">Application Instructions</label>
+            <textarea class="form-control" id="applicationInstructions" rows="2" placeholder="Provide specific application instructions..."></textarea>
+          </div>
+
+          <div class="form-check mb-4">
+            <input class="form-check-input" type="checkbox" id="featuredJob">
+            <label class="form-check-label" for="featuredJob">
+              Feature this job listing (additional cost may apply)
+            </label>
+          </div>
+
+          <!-- Preview Section -->
+          <div class="preview-section" id="previewSection">
+            <h4 class="preview-title"><i class="fas fa-eye"></i> Job Preview</h4>
+            <div class="preview-content">
+              <h5 id="previewTitle">Job Title</h5>
+              <p class="text-muted" id="previewCompany">Company Name</p>
+              <div class="d-flex flex-wrap gap-2 mb-3">
+                <span class="badge bg-primary" id="previewType">Full-time</span>
+                <span class="badge bg-secondary" id="previewLocation">Location</span>
+                <span class="badge bg-success" id="previewSalary">Salary</span>
+              </div>
+              <p id="previewDescription">Job description will appear here...</p>
+              <div class="mt-3">
+                <small class="text-muted">This is how your job will appear to candidates.</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-4">
+            <div class="col-md-6 mb-3">
+              <a href="admin-dashboard.html" class="btn btn-back">
+                <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
+              </a>
+            </div>
+            <div class="col-md-6 mb-3">
+              <button type="submit" class="btn btn-submit">
+                <i class="fas fa-paper-plane me-2"></i> Post Job Listing
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p class="mb-2">&copy; 2025 Corporate Job Portal | All Rights Reserved</p>
+      <div class="mt-2">
+        <a href="index.html" class="text-warning small">Back to Main Site</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Character counters
+    document.getElementById('jobDescription').addEventListener('input', function() {
+      const count = this.value.length;
+      const counter = document.getElementById('descCounter');
+      counter.textContent = `${count}/2000 characters`;
+      
+      if (count > 1800) {
+        counter.classList.add('warning');
+        counter.classList.remove('danger');
+      } else if (count > 1900) {
+        counter.classList.remove('warning');
+        counter.classList.add('danger');
+      } else {
+        counter.classList.remove('warning', 'danger');
+      }
+    });
+
+    document.getElementById('jobRequirements').addEventListener('input', function() {
+      const count = this.value.length;
+      const counter = document.getElementById('reqCounter');
+      counter.textContent = `${count}/1000 characters`;
+      
+      if (count > 800) {
+        counter.classList.add('warning');
+        counter.classList.remove('danger');
+      } else if (count > 900) {
+        counter.classList.remove('warning');
+        counter.classList.add('danger');
+      } else {
+        counter.classList.remove('warning', 'danger');
+      }
+    });
+
+    document.getElementById('jobBenefits').addEventListener('input', function() {
+      const count = this.value.length;
+      const counter = document.getElementById('benefitsCounter');
+      counter.textContent = `${count}/500 characters`;
+      
+      if (count > 400) {
+        counter.classList.add('warning');
+        counter.classList.remove('danger');
+      } else if (count > 450) {
+        counter.classList.remove('warning');
+        counter.classList.add('danger');
+      } else {
+        counter.classList.remove('warning', 'danger');
+      }
+    });
+
+    // Show/hide application details based on selection
+    document.getElementById('applicationMethod').addEventListener('change', function() {
+      const detailsDiv = document.getElementById('applicationDetails');
+      if (this.value !== 'portal') {
+        detailsDiv.style.display = 'block';
+      } else {
+        detailsDiv.style.display = 'none';
+      }
+    });
+
+    // Live preview functionality
+    const previewFields = ['jobTitle', 'companyName', 'jobType', 'location', 'jobDescription'];
+    
+    previewFields.forEach(field => {
+      document.getElementById(field).addEventListener('input', updatePreview);
+    });
+
+    function updatePreview() {
+      const title = document.getElementById('jobTitle').value;
+      const company = document.getElementById('companyName').value;
+      const type = document.getElementById('jobType').value;
+      const location = document.getElementById('location').value;
+      const description = document.getElementById('jobDescription').value;
+      
+      // Update preview elements
+      if (title) {
+        document.getElementById('previewTitle').textContent = title;
+        document.getElementById('previewSection').style.display = 'block';
+      }
+      
+      if (company) document.getElementById('previewCompany').textContent = company;
+      if (type) document.getElementById('previewType').textContent = type.charAt(0).toUpperCase() + type.slice(1).replace('-', ' ');
+      if (location) document.getElementById('previewLocation').textContent = location;
+      
+      // Update salary preview if available
+      const minSalary = document.getElementById('salaryMin').value;
+      const maxSalary = document.getElementById('salaryMax').value;
+      const period = document.getElementById('salaryPeriod').value;
+      
+      if (minSalary || maxSalary) {
+        let salaryText = '';
+        if (minSalary && maxSalary) {
+          salaryText = `$${minSalary} - $${maxSalary}/${period}`;
+        } else if (minSalary) {
+          salaryText = `From $${minSalary}/${period}`;
+        } else if (maxSalary) {
+          salaryText = `Up to $${maxSalary}/${period}`;
+        }
+        document.getElementById('previewSalary').textContent = salaryText;
+      } else {
+        document.getElementById('previewSalary').textContent = 'Salary not specified';
+      }
+      
+      // Update description preview (truncate if too long)
+      if (description) {
+        const truncated = description.length > 200 ? description.substring(0, 200) + '...' : description;
+        document.getElementById('previewDescription').textContent = truncated;
+      }
+    }
+
+    // Form submission
+    document.getElementById('addJobForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form values
+      const jobTitle = document.getElementById('jobTitle').value;
+      const companyName = document.getElementById('companyName').value;
+      const jobType = document.getElementById('jobType').value;
+      const location = document.getElementById('location').value;
+      const description = document.getElementById('jobDescription').value;
+      
+      // Simple validation
+      if (!jobTitle || !companyName || !jobType || !location || !description) {
+        alert('Please fill in all required fields');
+        return;
+      }
+      
+      // In a real application, you would send this data to a server
+      console.log('Job posting submission:', {
+        jobTitle, companyName, jobType, location, description
+      });
+      
+      // Simulate successful submission
+      alert('Job posted successfully! Redirecting to dashboard...');
+      // window.location.href = 'admin-dashboard.html'; // Redirect to dashboard
+    });
+  </script>
+</body>
+</html>

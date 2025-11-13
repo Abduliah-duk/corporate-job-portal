@@ -1,0 +1,232 @@
+/* ===========================
+   General Styles
+=========================== */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #004aad;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: #fff !important;
+}
+
+.nav-link {
+  color: #fff !important;
+  font-weight: 500;
+  margin-right: 15px;
+}
+
+.nav-link:hover {
+  color: #ffd700 !important;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+              url('../images/hero-bg.jpg') center/cover no-repeat;
+  color: white;
+  text-align: center;
+  padding: 120px 20px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.hero p {
+  font-size: 1.2rem;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #004aad;
+  border: none;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #003380;
+}
+
+/* Cards */
+.card {
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Sections */
+.section-title {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #004aad;
+}
+
+/* Footer */
+footer {
+  background-color: #004aad;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+footer a {
+  color: #ffd700;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Forms */
+.form-control {
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.form-control:focus {
+  border-color: #004aad;
+  box-shadow: 0 0 5px rgba(0, 74, 173, 0.5);
+}
+
+/* Job Listing */
+.job-card {
+  background-color: #fff;
+  border-left: 5px solid #004aad;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.job-card h5 {
+  font-weight: 600;
+}
+
+.job-card p {
+  margin-bottom: 10px;
+}
+
+/* Admin Dashboard */
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #004aad;
+  color: white;
+  padding: 20px;
+}
+
+.sidebar h4 {
+  color: #ffd700;
+}
+
+.sidebar a {
+  display: block;
+  color: #fff;
+  padding: 10px 0;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  color: #ffd700;
+}
+
+.main-content {
+  flex: 1;
+  padding: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .hero p {
+    font-size: 1rem;
+  }
+  .sidebar {
+    width: 100%;
+    text-align: center;
+  }
+}
+/* Modern hero section */
+.hero {
+  background: linear-gradient(135deg, #0056b3, #0d6efd);
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  background-image: url('../images/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Navbar hover effects */
+.navbar-nav .nav-link {
+  color: #ddd !important;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #0d6efd !important;
+}
+
+/* Job Cards */
+.job-card {
+  border: none;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(135deg, #0d6efd, #007bff);
+}
+
+/* Footer */
+footer a {
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #0d6efd;
+}

@@ -1,0 +1,64 @@
+# Dependencies
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+*/node_modules/
+
+# Mac OS
+.DS_Store
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Build directories
+dist/
+build/
+.out/
+.next/
+out/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp
+
+# Lock files (except package-lock.json)
+yarn.lock
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Package files
+*.tgz
+*.tar.gz
+
+# Firebase
+.firebase/
+.firebaserc
+
+# Local development
+.local

@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jobs | Corporate Job Portal</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #004aad;
+      --primary-dark: #003380;
+      --secondary: #ffd700;
+      --accent: #6c63ff;
+      --light: #f8f9fa;
+      --dark: #333;
+      --gray: #6c757d;
+      --success: #28a745;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--primary);
+      padding: 15px 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: #fff !important;
+      font-size: 1.5rem;
+    }
+
+    .navbar-brand span {
+      color: var(--secondary);
+    }
+
+    .nav-link {
+      color: #fff !important;
+      font-weight: 500;
+      margin: 0 10px;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--secondary) !important;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--secondary);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link.active {
+      color: var(--secondary) !important;
+    }
+
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Jobs Section */
+    .jobs-section {
+      padding: 80px 0;
+      min-height: 100vh;
+    }
+
+    .section-title {
+      text-align: center;
+      font-weight: 700;
+      margin-bottom: 40px;
+      color: var(--primary);
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 4px;
+      background: var(--secondary);
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--gray);
+      max-width: 700px;
+      margin: 0 auto 50px;
+      font-size: 1.1rem;
+    }
+
+    /* Search and Filter Section */
+    .search-section {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      margin-bottom: 40px;
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    .search-box input {
+      border-radius: 30px;
+      padding: 12px 20px 12px 45px;
+      border: 1px solid #e1e5ee;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .search-box input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.25rem rgba(0, 74, 173, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray);
+      z-index: 2;
+    }
+
+    .filter-btn {
+      background: white;
+      border: 1px solid #e1e5ee;
+      border-radius: 30px;
+      padding: 10px 20px;
+      font-weight: 500;
+      color: var(--gray);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Job Cards */
+    .job-card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      height: 100%;
+      border-left: 4px solid var(--primary);
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .job-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .job-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--secondary);
+      color: var(--primary);
+      padding: 5px 12px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .job-title {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    .job-company {
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .job-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .job-detail {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    .job-detail i {
+      color: var(--primary);
+      width: 16px;
+    }
+
+    .job-description {
+      color: var(--gray);
+      margin-bottom: 25px;
+      font-size: 0.95rem;
+    }
+
+    .job-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .job-tag {
+      background: rgba(0, 74, 173, 0.1);
+      color: var(--primary);
+      padding: 5px 12px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .btn-apply {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border: none;
+      border-radius: 30px;
+      padding: 10px 25px;
+      font-weight: 600;
+      color: white;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 74, 173, 0.3);
+      width: 100%;
+    }
+
+    .btn-apply:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 74, 173, 0.4);
+    }
+
+    /* Job Stats */
+    .job-stats {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      padding: 60px 0;
+      border-radius: 15px;
+      margin: 50px 0;
+      text-align: center;
+    }
+
+    .stat-item {
+      padding: 20px;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .stat-text {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Newsletter Section */
+    .newsletter-section {
+      background: white;
+      border-radius: 15px;
+      padding: 50px 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      margin: 50px 0;
+    }
+
+    .newsletter-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+
+    .newsletter-text {
+      color: var(--gray);
+      margin-bottom: 25px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 10px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .newsletter-form .form-control {
+      border-radius: 30px;
+      padding: 12px 20px;
+      border: 1px solid #e1e5ee;
+    }
+
+    .newsletter-form .btn {
+      border-radius: 30px;
+      padding: 12px 25px;
+      font-weight: 600;
+      background: var(--primary);
+      color: white;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .newsletter-form .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Pagination */
+    .jobs-pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .page-link {
+      color: var(--primary);
+      border: 1px solid #e1e5ee;
+      padding: 10px 18px;
+      margin: 0 5px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .page-link:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .page-item.active .page-link {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--primary);
+      color: white;
+      padding: 40px 0 20px;
+    }
+
+    footer a {
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+
+    .social-icons a {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      text-align: center;
+      line-height: 40px;
+      margin: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      background-color: var(--secondary);
+      color: var(--primary);
+      transform: translateY(-5px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .search-section {
+        padding: 20px;
+      }
+      
+      .newsletter-form {
+        flex-direction: column;
+      }
+      
+      .job-details {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .stat-number {
+        font-size: 2rem;
+      }
+      
+      .jobs-section {
+        padding: 40px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+        <!-- Logo with correct path -->
+        <img src="images/images:logo.png" alt="Corporate Job Portal Logo" width="45" class="me-2">
+        <span>Corp<span class="text-warning">Job</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto fw-semibold">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link active" href="jobs.html">Jobs</a></li>
+          <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfolio</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item">
+            <a class="btn btn-outline-warning btn-sm ms-lg-3" href="login.html">
+              <i class="fa fa-user"></i> Login
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Jobs Section -->
+  <section class="jobs-section">
+    <div class="container">
+      <h2 class="section-title">Available Jobs</h2>
+      <p class="section-subtitle">Discover your next career opportunity from our curated list of positions from top companies.</p>
+      
+      <!-- Search and Filter Section -->
+      <div class="search-section">
+        <div class="row g-3 align-items-end">
+          <div class="col-md-5">
+            <label class="form-label fw-semibold">Search Jobs</label>
+            <div class="search-box">
+              <i class="fas fa-search search-icon"></i>
+              <input type="text" class="form-control" placeholder="Job title, keywords, or company">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label fw-semibold">Location</label>
+            <select class="form-select">
+              <option selected>Any Location</option>
+              <option>Remote</option>
+              <option>New York</option>
+              <option>San Francisco</option>
+              <option>London</option>
+              <option>Toronto</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label fw-semibold">Job Type</label>
+            <select class="form-select">
+              <option selected>Any Type</option>
+              <option>Full-time</option>
+              <option>Part-time</option>
+              <option>Contract</option>
+              <option>Internship</option>
+            </select>
+          </div>
+          <div class="col-md-1">
+            <button class="btn btn-primary w-100" style="border-radius: 10px; padding: 10px;">
+              <i class="fas fa-filter"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job Listings -->
+      <div class="row g-4">
+        <!-- Job Card 1 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="job-card">
+            <span class="job-badge">New</span>
+            <h3 class="job-title">Frontend Developer</h3>
+            <div class="job-company">
+              <i class="fas fa-building"></i>
+              <span>TechNova Solutions</span>
+            </div>
+            <div class="job-details">
+              <div class="job-detail">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Remote</span>
+              </div>
+              <div class="job-detail">
+                <i class="fas fa-clock"></i>
+                <span>Full-time</span>
+              </div>
+              <div class="job-detail">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>$70,000 - $90,000/year</span>
+              </div>
+            </div>
+            <p class="job-description">We're looking for a skilled Frontend Developer to join our growing team. You'll be responsible for building responsive web applications using modern frameworks.</p>
+            <div class="job-tags">
+              <span class="job-tag">React</span>
+              <span class="job-tag">JavaScript</span>
+              <span class="job-tag">CSS</span>
+            </div>
+            <button class="btn btn-apply">Apply Now</button>
+          </div>
+        </div>
+
+        <!-- Job Card 2 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="job-card">
+            <span class="job-badge">Urgent</span>
+            <h3 class="job-title">Data Analyst</h3>
+            <div class="job-company">
+              <i class="fas fa-building"></i>
+              <span>DataWorks Inc.</span>
+            </div>
+            <div class="job-details">
+              <div class="job-detail">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>New York, NY</span>
+              </div>
+              <div class="job-detail">
+                <i class="fas fa-clock"></i>
+                <span>Full-time</span>
+              </div>
+              <div class="job-detail">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>$80,000 - $100,000/year</span>
+              </div>
+            </div>
+            <p class="job-description">Join our analytics team to help transform data into actionable insights. Experience with SQL, Python, and data visualization tools required.</p>
+            <div class="job-tags">
+              <span class="job-tag">SQL</span>
+              <span class="job-tag">Python</span>
+              <span class="job-tag">Tableau</span>
+            </div>
+            <button class="btn btn-apply">Apply Now</button>
+          </div>
+        </div>
+
+        <!-- Job Card 3 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="job-card">
+            <h3 class="job-title">UX/UI Designer</h3>
+            <div class="job-company">
+              <i class="fas fa-building"></i>
+              <span>CreativeMinds Agency</span>
+            </div>
+            <div class="job-details">
+              <div class="job-detail">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>San Francisco, CA</span>
+              </div>
+              <div class="job-detail">
+                <i class="fas fa-clock"></i>
+                <span>Full-time</span>
+              </div>
+              <div class="job-detail">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>$75,000 - $95,000/year</span>
+              </div>
+            </div>
+            <p class="job-description">We're seeking a talented UX/UI Designer to create beautiful and intuitive user experiences for our digital products and platforms.</p>
+            <div class="job-tags">
+              <span class="job-tag">Figma</span>
+              <span class="job-tag">Adobe XD</span>
+              <span class="job-tag">User Research</span>
+            </div>
+            <button class="btn btn-apply">Apply Now</button>
+          </div>
+        </div>
+
+        <!-- Job Card 4 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="job-card">
+            <h3 class="job-title">Backend Developer</h3>
+            <div class="job-company">
+              <i class="fas fa-building"></i>
+              <span>ServerStack Technologies</span>
+            </div>
+            <div class="job-details">
+              <div class="job-detail">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Remote</span>
+              </div>
+              <div class="job-detail">
+                <i class="fas fa-clock"></i>
+                <span>Full-time</span>
+              </div>
+              <div class="job-detail">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>$85,000 - $110,000/year</span>
+              </div>
+            </div>
+            <p class="job-description">Looking for an experienced Backend Developer to build scalable APIs and services. Strong knowledge of Node.js and database design required.</p>
+            <div class="job-tags">
+              <span class="job-tag">Node.js</span>
+              <span class="job-tag">MongoDB</span>
+              <span class="job-tag">AWS</span>
+            </div>
+            <button class="btn btn-apply">Apply Now</button>
+          </div>
+        </div>
+
+        <!-- Job Card 5 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="job-card">
+            <span class="job-badge">Remote</span>
+            <h3 class="job-title">Digital Marketing Manager</h3>
+            <div class="job-company">
+              <i class="fas fa-building"></i>
+              <span>GrowthHack Digital</span>
+            </div>
+            <div class="job-details">
+              <div class="job-detail">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Remote</span>
+              </div>
+              <div class="job-detail">
+                <i class="fas fa-clock"></i>
+                <span>Full-time</span>
+              </div>
+              <div class="job-detail">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>$65,000 - $85,000/year</span>
+              </div>
+            </div>
+            <p class="job-description">Seeking a Digital Marketing Manager to lead our online campaigns and drive customer acquisition through various digital channels.</p>
+            <div class="job-tags">
+              <span class="job-tag">SEO</span>
+              <span class="job-tag">Social Media</span>
+              <span class="job-tag">Google Ads</span>
+            </div>
+            <button class="btn btn-apply">Apply Now</button>
+          </div>
+        </div>
+
+        <!-- Job Card 6 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="job-card">
+            <h3 class="job-title">Project Manager</h3>
+            <div class="job-company">
+              <i class="fas fa-building"></i>
+              <span>BuildSmart Solutions</span>
+            </div>
+            <div class="job-details">
+              <div class="job-detail">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Chicago, IL</span>
+              </div>
+              <div class="job-detail">
+                <i class="fas fa-clock"></i>
+                <span>Full-time</span>
+              </div>
+              <div class="job-detail">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>$90,000 - $120,000/year</span>
+              </div>
+            </div>
+            <p class="job-description">We need an experienced Project Manager to oversee our software development projects and ensure timely delivery of high-quality products.</p>
+            <div class="job-tags">
+              <span class="job-tag">Agile</span>
+              <span class="job-tag">Scrum</span>
+              <span class="job-tag">JIRA</span>
+            </div>
+            <button class="btn btn-apply">Apply Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job Stats -->
+      <div class="job-stats">
+        <div class="row text-center">
+          <div class="col-md-3 col-6 stat-item">
+            <div class="stat-number">500+</div>
+            <div class="stat-text">Active Jobs</div>
+          </div>
+          <div class="col-md-3 col-6 stat-item">
+            <div class="stat-number">200+</div>
+            <div class="stat-text">Partner Companies</div>
+          </div>
+          <div class="col-md-3 col-6 stat-item">
+            <div class="stat-number">50+</div>
+            <div class="stat-text">Job Categories</div>
+          </div>
+          <div class="col-md-3 col-6 stat-item">
+            <div class="stat-number">30+</div>
+            <div class="stat-text">Countries</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Newsletter Section -->
+      <div class="newsletter-section">
+        <h3 class="newsletter-title">Get Job Alerts</h3>
+        <p class="newsletter-text">Subscribe to our newsletter and receive the latest job openings directly in your inbox.</p>
+        <form class="newsletter-form">
+          <input type="email" class="form-control" placeholder="Your email address" required>
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+
+      <!-- Pagination -->
+      <nav class="jobs-pagination">
+        <ul class="pagination">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <h5 class="fw-bold">Corp<span class="text-warning">Job</span></h5>
+          <p>Connecting talent with opportunity. Our platform helps job seekers find their dream careers and employers find the perfect candidates.</p>
+          <div class="social-icons mt-3">
+            <a href="https://facebook.com"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com"><i class="fab fa-twitter"></i></a>
+            <a href="https://linkedin.com"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://instagram.com"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="col-md-2 mb-4">
+          <h5 class="fw-bold">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="jobs.html">Jobs</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div class="col-md-2 mb-4">
+          <h5 class="fw-bold">Resources</h5>
+          <ul class="list-unstyled">
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h5 class="fw-bold">Subscribe to Our Newsletter</h5>
+          <p>Get the latest job alerts and career advice.</p>
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Your email address">
+            <button class="btn btn-warning" type="button">Subscribe</button>
+          </div>
+        </div>
+      </div>
+      <hr class="my-4">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <p class="mb-0">&copy; 2025 Corporate Job Portal | All Rights Reserved</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <a href="admin-dashboard.html" class="text-warning small">Admin Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Job application functionality
+    document.querySelectorAll('.btn-apply').forEach(button => {
+      button.addEventListener('click', function() {
+        const jobTitle = this.closest('.job-card').querySelector('.job-title').textContent;
+        const company = this.closest('.job-card').querySelector('.job-company span').textContent;
+        
+        // Check if user is logged in (in a real app, this would check authentication)
+        const isLoggedIn = false; // This would be set based on actual authentication
+        
+        if (!isLoggedIn) {
+          alert(`To apply for "${jobTitle}" at ${company}, please log in to your account.`);
+          // In a real application, this would redirect to login page
+          // window.location.href = 'login.html';
+        } else {
+          alert(`Application for "${jobTitle}" at ${company} has been submitted successfully!`);
+        }
+      });
+    });
+
+    // Search functionality
+    const searchInput = document.querySelector('.search-box input');
+    searchInput.addEventListener('keyup', function(e) {
+      if (e.key === 'Enter') {
+        const searchTerm = this.value;
+        if (searchTerm.trim() !== '') {
+          alert(`Searching for jobs with keyword: ${searchTerm}`);
+          // In a real application, this would filter job listings
+        }
+      }
+    });
+
+    // Filter functionality
+    const filterBtn = document.querySelector('.btn-primary');
+    filterBtn.addEventListener('click', function() {
+      const location = document.querySelector('select').value;
+      const jobType = document.querySelectorAll('select')[1].value;
+      alert(`Filtering jobs by location: ${location} and type: ${jobType}`);
+    });
+  </script>
+</body>
+</html>

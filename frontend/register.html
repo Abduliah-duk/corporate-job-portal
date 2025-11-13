@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register | Corporate Job Portal</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #004aad;
+      --primary-dark: #003380;
+      --secondary: #ffd700;
+      --accent: #6c63ff;
+      --light: #f8f9fa;
+      --dark: #333;
+      --gray: #6c757d;
+      --success: #28a745;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, rgba(0, 74, 173, 0.9), rgba(108, 99, 255, 0.8)), 
+                  url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover no-repeat fixed;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--primary);
+      padding: 15px 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: #fff !important;
+      font-size: 1.5rem;
+    }
+
+    .navbar-brand span {
+      color: var(--secondary);
+    }
+
+    /* Registration Container */
+    .register-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .register-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      padding: 40px 30px;
+      width: 100%;
+      max-width: 500px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .register-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .register-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .register-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .register-icon i {
+      font-size: 2rem;
+      color: white;
+    }
+
+    .register-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .register-subtitle {
+      color: var(--gray);
+      font-size: 0.95rem;
+    }
+
+    /* Form Styles */
+    .form-label {
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      padding: 12px 15px;
+      border: 1px solid #e1e5ee;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.25rem rgba(0, 74, 173, 0.15);
+    }
+
+    .input-group-text {
+      background-color: white;
+      border: 1px solid #e1e5ee;
+      border-right: none;
+      border-radius: 10px 0 0 10px;
+    }
+
+    .password-toggle {
+      cursor: pointer;
+      color: var(--gray);
+      transition: color 0.3s ease;
+    }
+
+    .password-toggle:hover {
+      color: var(--primary);
+    }
+
+    .password-strength {
+      height: 5px;
+      border-radius: 5px;
+      margin-top: 5px;
+      background-color: #e9ecef;
+      overflow: hidden;
+    }
+
+    .password-strength-bar {
+      height: 100%;
+      width: 0%;
+      border-radius: 5px;
+      transition: width 0.3s ease, background-color 0.3s ease;
+    }
+
+    .strength-weak {
+      background-color: #dc3545;
+      width: 25%;
+    }
+
+    .strength-fair {
+      background-color: #fd7e14;
+      width: 50%;
+    }
+
+    .strength-good {
+      background-color: #ffc107;
+      width: 75%;
+    }
+
+    .strength-strong {
+      background-color: #28a745;
+      width: 100%;
+    }
+
+    .password-requirements {
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-top: 5px;
+    }
+
+    .requirement {
+      display: flex;
+      align-items: center;
+      margin-bottom: 3px;
+    }
+
+    .requirement i {
+      font-size: 0.7rem;
+      margin-right: 5px;
+      width: 12px;
+    }
+
+    .requirement.met {
+      color: var(--success);
+    }
+
+    .requirement.unmet {
+      color: var(--gray);
+    }
+
+    /* Buttons */
+    .btn-register {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 74, 173, 0.3);
+    }
+
+    .btn-register:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 74, 173, 0.4);
+    }
+
+    .btn-google {
+      background-color: white;
+      border: 1px solid #e1e5ee;
+      border-radius: 10px;
+      padding: 12px;
+      font-weight: 500;
+      color: var(--dark);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn-google:hover {
+      background-color: #f8f9fa;
+      border-color: #d1d5db;
+    }
+
+    /* Links */
+    .register-links {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .register-links a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .register-links a:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+
+    /* Divider */
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 25px 0;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background-color: #e1e5ee;
+    }
+
+    .divider-text {
+      padding: 0 15px;
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    /* User Type Selection */
+    .user-type-selection {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .user-type-option {
+      flex: 1;
+      text-align: center;
+      padding: 15px 10px;
+      border: 2px solid #e1e5ee;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .user-type-option:hover {
+      border-color: var(--primary);
+    }
+
+    .user-type-option.selected {
+      border-color: var(--primary);
+      background-color: rgba(0, 74, 173, 0.05);
+    }
+
+    .user-type-icon {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+
+    .user-type-label {
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    /* Terms Checkbox */
+    .terms-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .terms-check input {
+      margin-top: 3px;
+    }
+
+    .terms-text {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+
+    .terms-text a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .terms-text a:hover {
+      text-decoration: underline;
+    }
+
+    /* Loading State */
+    .btn-loading {
+      position: relative;
+      color: transparent;
+    }
+
+    .btn-loading::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: 50%;
+      left: 50%;
+      margin-left: -10px;
+      margin-top: -10px;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Alert Styles */
+    .alert-custom {
+      border-radius: 10px;
+      border: none;
+      padding: 12px 15px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--primary);
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    footer a {
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 576px) {
+      .register-card {
+        padding: 30px 20px;
+      }
+      
+      .register-icon {
+        width: 70px;
+        height: 70px;
+      }
+      
+      .register-icon i {
+        font-size: 1.7rem;
+      }
+      
+      .user-type-selection {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+        <img src="images/images:logo.png" alt="Logo" width="45" class="me-2" />
+        <span>Corp<span class="text-warning">Job</span></span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Registration Section -->
+  <section class="register-container">
+    <div class="register-card">
+      <div class="register-header">
+        <div class="register-icon">
+          <i class="fas fa-user-plus"></i>
+        </div>
+        <h2 class="register-title">Create Your Account</h2>
+        <p class="register-subtitle">Join thousands of professionals finding their dream careers</p>
+      </div>
+
+      <!-- Alert Container -->
+      <div id="alertContainer"></div>
+
+      <form id="registerForm">
+        <!-- User Type Selection -->
+        <div class="user-type-selection">
+          <div class="user-type-option selected" data-type="job-seeker">
+            <div class="user-type-icon">
+              <i class="fas fa-user-tie"></i>
+            </div>
+            <div class="user-type-label">Job Seeker</div>
+          </div>
+          <div class="user-type-option" data-type="employer">
+            <div class="user-type-icon">
+              <i class="fas fa-building"></i>
+            </div>
+            <div class="user-type-label">Employer</div>
+          </div>
+        </div>
+        <input type="hidden" id="userType" name="userType" value="job-seeker">
+
+        <div class="mb-3">
+          <label class="form-label">Full Name</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-user"></i></span>
+            <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
+          </div>
+        </div>
+        
+        <div class="mb-3">
+          <label class="form-label">Email Address</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            <input type="email" class="form-control" id="email" placeholder="Enter your email address" required>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+            <input type="password" id="password" class="form-control" placeholder="Create a strong password" required>
+            <span class="input-group-text password-toggle" id="togglePassword">
+              <i class="fas fa-eye"></i>
+            </span>
+          </div>
+          <div class="password-strength">
+            <div class="password-strength-bar" id="passwordStrengthBar"></div>
+          </div>
+          <div class="password-requirements" id="passwordRequirements">
+            <div class="requirement unmet" id="reqLength"><i class="fas fa-circle"></i> At least 8 characters</div>
+            <div class="requirement unmet" id="reqUppercase"><i class="fas fa-circle"></i> One uppercase letter</div>
+            <div class="requirement unmet" id="reqLowercase"><i class="fas fa-circle"></i> One lowercase letter</div>
+            <div class="requirement unmet" id="reqNumber"><i class="fas fa-circle"></i> One number</div>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Confirm Password</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+            <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm your password" required>
+            <span class="input-group-text password-toggle" id="toggleConfirmPassword">
+              <i class="fas fa-eye"></i>
+            </span>
+          </div>
+          <div class="password-match mt-2" id="passwordMatch"></div>
+        </div>
+
+        <div class="terms-check">
+          <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+          <label class="form-check-label terms-text" for="agreeTerms">
+            I agree to the <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-register w-100 mb-3" id="registerBtn">
+          <span id="registerText">Create Account</span>
+        </button>
+
+        <div class="divider">
+          <span class="divider-text">Or sign up with</span>
+        </div>
+
+        <button type="button" class="btn btn-google w-100 mb-4" id="googleBtn">
+          <i class="fab fa-google"></i> Continue with Google
+        </button>
+
+        <div class="register-links">
+          <p>Already have an account? <a href="login.html">Sign in here</a></p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p class="mb-2">&copy; 2025 Corporate Job Portal | All Rights Reserved</p>
+      <div class="mt-2">
+        <a href="admin-dashboard.html" class="text-warning small">Admin Login</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Firebase Authentication -->
+  <script type="module">
+    // Import Firebase modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import { 
+      getAuth, 
+      createUserWithEmailAndPassword, 
+      GoogleAuthProvider, 
+      signInWithPopup,
+      updateProfile
+    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDVBUe1dLJpcxhBOalobGzjxEfHUbkK3zk",
+      authDomain: "corporate-job-portal-8effc.firebaseapp.com",
+      projectId: "corporate-job-portal-8effc",
+      storageBucket: "corporate-job-portal-8effc.firebasestorage.app",
+      messagingSenderId: "427084850716",
+      appId: "1:427084850716:web:95af4f5594c9d2429021d9",
+      measurementId: "G-CTVZHNEWGJ"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    // UI Elements
+    const registerForm = document.getElementById("registerForm");
+    const registerBtn = document.getElementById("registerBtn");
+    const registerText = document.getElementById("registerText");
+    const googleBtn = document.getElementById("googleBtn");
+    const alertContainer = document.getElementById("alertContainer");
+
+    // Show alert function
+    function showAlert(message, type = 'danger') {
+      alertContainer.innerHTML = `
+        <div class="alert alert-${type} alert-custom alert-dismissible fade show" role="alert">
+          ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      `;
+    }
+
+    // Show loading state
+    function setLoadingState(loading) {
+      if (loading) {
+        registerBtn.classList.add('btn-loading');
+        registerBtn.disabled = true;
+      } else {
+        registerBtn.classList.remove('btn-loading');
+        registerBtn.disabled = false;
+      }
+    }
+
+    // Handle Registration Form
+    registerForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const fullName = document.getElementById('fullName').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      const userType = document.getElementById('userType').value;
+      const agreeTerms = document.getElementById('agreeTerms').checked;
+
+      // Validation
+      if (!fullName || !email || !password || !confirmPassword) {
+        showAlert('Please fill in all required fields');
+        return;
+      }
+
+      if (!agreeTerms) {
+        showAlert('Please agree to the Terms of Service and Privacy Policy');
+        return;
+      }
+      
+      if (password !== confirmPassword) {
+        showAlert('Passwords do not match');
+        return;
+      }
+
+      if (password.length < 6) {
+        showAlert('Password should be at least 6 characters long');
+        return;
+      }
+
+      setLoadingState(true);
+
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // Update user profile with display name
+        await updateProfile(user, {
+          displayName: fullName
+        });
+
+        // Store additional user data in localStorage
+        localStorage.setItem('user', JSON.stringify({
+          email: user.email,
+          uid: user.uid,
+          displayName: fullName,
+          userType: userType,
+          createdAt: new Date().toISOString()
+        }));
+
+        showAlert(`Account created successfully for ${user.email}! Redirecting to dashboard...`, 'success');
+        
+        // Redirect after short delay
+        setTimeout(() => {
+          window.location.href = "dashboard.html";
+        }, 2000);
+        
+      } catch (error) {
+        console.error('Registration error:', error);
+        
+        // User-friendly error messages
+        let errorMessage = 'Registration failed. Please try again.';
+        switch (error.code) {
+          case 'auth/email-already-in-use':
+            errorMessage = 'An account with this email already exists.';
+            break;
+          case 'auth/invalid-email':
+            errorMessage = 'Invalid email address format.';
+            break;
+          case 'auth/weak-password':
+            errorMessage = 'Password is too weak. Please choose a stronger password.';
+            break;
+          case 'auth/operation-not-allowed':
+            errorMessage = 'Email/password accounts are not enabled. Please contact support.';
+            break;
+          case 'auth/network-request-failed':
+            errorMessage = 'Network error. Please check your connection and try again.';
+            break;
+        }
+        
+        showAlert(errorMessage);
+      } finally {
+        setLoadingState(false);
+      }
+    });
+
+    // Handle Google Sign-Up
+    googleBtn.addEventListener("click", async () => {
+      try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        
+        // Store user data in localStorage
+        localStorage.setItem('user', JSON.stringify({
+          email: user.email,
+          uid: user.uid,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+          userType: 'job-seeker', // Default type for Google sign-ups
+          createdAt: new Date().toISOString()
+        }));
+
+        showAlert(`Welcome ${user.displayName}! Redirecting to dashboard...`, 'success');
+        
+        // Redirect after short delay
+        setTimeout(() => {
+          window.location.href = "dashboard.html";
+        }, 1500);
+        
+      } catch (error) {
+        console.error('Google sign-up error:', error);
+        
+        let errorMessage = 'Google sign-up failed. Please try again.';
+        if (error.code === 'auth/popup-closed-by-user') {
+          errorMessage = 'Sign-up was cancelled.';
+        } else if (error.code === 'auth/popup-blocked') {
+          errorMessage = 'Sign-up popup was blocked. Please allow popups for this site.';
+        } else if (error.code === 'auth/account-exists-with-different-credential') {
+          errorMessage = 'An account already exists with the same email address but different sign-in credentials.';
+        }
+        
+        showAlert(errorMessage);
+      }
+    });
+
+    // Check if user is already logged in
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in, redirect to dashboard
+        window.location.href = "dashboard.html";
+      }
+    });
+
+    // Original JavaScript functionality
+    // User type selection
+    document.querySelectorAll('.user-type-option').forEach(option => {
+      option.addEventListener('click', function() {
+        document.querySelectorAll('.user-type-option').forEach(opt => {
+          opt.classList.remove('selected');
+        });
+        this.classList.add('selected');
+        document.getElementById('userType').value = this.getAttribute('data-type');
+      });
+    });
+
+    // Password visibility toggle
+    document.getElementById('togglePassword').addEventListener('click', function() {
+      const passwordInput = document.getElementById('password');
+      const icon = this.querySelector('i');
+      
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        passwordInput.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    });
+
+    document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+      const passwordInput = document.getElementById('confirmPassword');
+      const icon = this.querySelector('i');
+      
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        passwordInput.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    });
+
+    // Password strength checker
+    document.getElementById('password').addEventListener('input', function() {
+      const password = this.value;
+      const strengthBar = document.getElementById('passwordStrengthBar');
+      const requirements = {
+        length: document.getElementById('reqLength'),
+        uppercase: document.getElementById('reqUppercase'),
+        lowercase: document.getElementById('reqLowercase'),
+        number: document.getElementById('reqNumber')
+      };
+      
+      // Reset classes
+      strengthBar.className = 'password-strength-bar';
+      Object.values(requirements).forEach(req => {
+        req.className = 'requirement unmet';
+        req.querySelector('i').className = 'fas fa-circle';
+      });
+      
+      let strength = 0;
+      
+      // Check length
+      if (password.length >= 8) {
+        requirements.length.className = 'requirement met';
+        requirements.length.querySelector('i').className = 'fas fa-check-circle';
+        strength += 25;
+      }
+      
+      // Check uppercase
+      if (/[A-Z]/.test(password)) {
+        requirements.uppercase.className = 'requirement met';
+        requirements.uppercase.querySelector('i').className = 'fas fa-check-circle';
+        strength += 25;
+      }
+      
+      // Check lowercase
+      if (/[a-z]/.test(password)) {
+        requirements.lowercase.className = 'requirement met';
+        requirements.lowercase.querySelector('i').className = 'fas fa-check-circle';
+        strength += 25;
+      }
+      
+      // Check number
+      if (/[0-9]/.test(password)) {
+        requirements.number.className = 'requirement met';
+        requirements.number.querySelector('i').className = 'fas fa-check-circle';
+        strength += 25;
+      }
+      
+      // Update strength bar
+      if (strength <= 25) {
+        strengthBar.classList.add('strength-weak');
+      } else if (strength <= 50) {
+        strengthBar.classList.add('strength-fair');
+      } else if (strength <= 75) {
+        strengthBar.classList.add('strength-good');
+      } else {
+        strengthBar.classList.add('strength-strong');
+      }
+      
+      // Check password match
+      checkPasswordMatch();
+    });
+
+    // Password match checker
+    document.getElementById('confirmPassword').addEventListener('input', checkPasswordMatch);
+    
+    function checkPasswordMatch() {
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      const matchIndicator = document.getElementById('passwordMatch');
+      
+      if (confirmPassword === '') {
+        matchIndicator.innerHTML = '';
+        return;
+      }
+      
+      if (password === confirmPassword) {
+        matchIndicator.innerHTML = '<span class="text-success"><i class="fas fa-check-circle me-1"></i>Passwords match</span>';
+      } else {
+        matchIndicator.innerHTML = '<span class="text-danger"><i class="fas fa-times-circle me-1"></i>Passwords do not match</span>';
+      }
+    }
+  </script>
+</body>
+</html>

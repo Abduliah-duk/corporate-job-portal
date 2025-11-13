@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Services | Corporate Job Portal</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <style>
+    :root {
+      --primary: #004aad;
+      --primary-dark: #003380;
+      --secondary: #ffd700;
+      --accent: #6c63ff;
+      --light: #f8f9fa;
+      --dark: #333;
+      --gray: #6c757d;
+      --success: #28a745;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--primary);
+      padding: 15px 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: #fff !important;
+      font-size: 1.5rem;
+    }
+
+    .navbar-brand span {
+      color: var(--secondary);
+    }
+
+    .nav-link {
+      color: #fff !important;
+      font-weight: 500;
+      margin: 0 10px;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--secondary) !important;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--secondary);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link.active {
+      color: var(--secondary) !important;
+    }
+
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Services Section */
+    .services-section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-weight: 700;
+      margin-bottom: 40px;
+      color: var(--primary);
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 4px;
+      background: var(--secondary);
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--gray);
+      max-width: 700px;
+      margin: 0 auto 50px;
+      font-size: 1.1rem;
+    }
+
+    /* Service Cards */
+    .service-card {
+      background: white;
+      border-radius: 15px;
+      padding: 40px 25px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      height: 100%;
+      border: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .service-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 25px;
+      color: white;
+      font-size: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .service-card:hover .service-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .service-card h5 {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+
+    .service-card p {
+      color: var(--gray);
+      margin-bottom: 20px;
+    }
+
+    .service-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+    }
+
+    .service-features li {
+      padding: 8px 0;
+      color: var(--gray);
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .service-features li i {
+      color: var(--success);
+      margin-right: 10px;
+      font-size: 0.8rem;
+    }
+
+    .service-link {
+      color: var(--primary);
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.3s ease;
+      margin-top: 15px;
+    }
+
+    .service-link:hover {
+      color: var(--primary-dark);
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .stat-item {
+      padding: 20px;
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .stat-text {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Pricing Section */
+    .pricing-section {
+      padding: 80px 0;
+      background-color: white;
+    }
+
+    .pricing-card {
+      background: white;
+      border-radius: 15px;
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      height: 100%;
+      border: 2px solid #f0f0f0;
+      position: relative;
+    }
+
+    .pricing-card.featured {
+      border-color: var(--primary);
+      transform: scale(1.05);
+      box-shadow: 0 15px 35px rgba(0, 74, 173, 0.2);
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .pricing-card.featured:hover {
+      transform: scale(1.05) translateY(-10px);
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--secondary);
+      color: var(--primary);
+      padding: 5px 20px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .pricing-header {
+      margin-bottom: 30px;
+    }
+
+    .pricing-title {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+    }
+
+    .pricing-price {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 5px;
+    }
+
+    .pricing-period {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    .pricing-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 30px;
+      text-align: left;
+    }
+
+    .pricing-features li {
+      padding: 10px 0;
+      color: var(--gray);
+      display: flex;
+      align-items: center;
+    }
+
+    .pricing-features li i {
+      color: var(--success);
+      margin-right: 10px;
+      font-size: 0.9rem;
+    }
+
+    .pricing-features li.disabled {
+      color: #ccc;
+    }
+
+    .pricing-features li.disabled i {
+      color: #ccc;
+    }
+
+    .btn-pricing {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border: none;
+      border-radius: 30px;
+      padding: 12px 30px;
+      font-weight: 600;
+      color: white;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 74, 173, 0.3);
+      width: 100%;
+    }
+
+    .btn-pricing:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 74, 173, 0.4);
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,224C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+      background-size: cover;
+      background-position: bottom;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-section h2 {
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .cta-section p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-section .btn {
+      background-color: white;
+      color: var(--primary);
+      border-radius: 30px;
+      padding: 12px 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .cta-section .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--primary);
+      color: white;
+      padding: 40px 0 20px;
+    }
+
+    footer a {
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+
+    .social-icons a {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      text-align: center;
+      line-height: 40px;
+      margin: 0 5px;
+      transition: all 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      background-color: var(--secondary);
+      color: var(--primary);
+      transform: translateY(-5px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .pricing-card.featured {
+        transform: scale(1);
+        margin: 20px 0;
+      }
+      
+      .pricing-card.featured:hover {
+        transform: translateY(-10px);
+      }
+      
+      .service-card {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ✅ Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+        <img src="images/images:logo.png" width="45" class="me-2" alt="Logo" />
+        <span>Corp<span class="text-warning">Job</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto fw-semibold">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="jobs.html">Jobs</a></li>
+          <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfolio</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item">
+            <a class="btn btn-outline-warning btn-sm ms-lg-3" href="login.html">
+              <i class="fa fa-user"></i> Login
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ✅ Services Section -->
+  <section class="services-section">
+    <div class="container">
+      <h2 class="section-title">Our Core Services</h2>
+      <p class="section-subtitle">Comprehensive solutions designed to connect talent with opportunity and help businesses find the perfect candidates.</p>
+      
+      <div class="row g-4">
+        <!-- Service 1 -->
+        <div class="col-md-4">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fa fa-briefcase"></i>
+            </div>
+            <h5>Job Listings</h5>
+            <p>Explore verified jobs from top employers worldwide and apply directly through our secure platform.</p>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> Verified employer profiles</li>
+              <li><i class="fas fa-check"></i> Advanced search filters</li>
+              <li><i class="fas fa-check"></i> One-click applications</li>
+            </ul>
+            <a href="jobs.html" class="service-link">Browse Jobs <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="col-md-4">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <h5>Recruitment Solutions</h5>
+            <p>Helping organizations find the best candidates through advanced screening and AI-driven matching.</p>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> AI-powered candidate matching</li>
+              <li><i class="fas fa-check"></i> Comprehensive background checks</li>
+              <li><i class="fas fa-check"></i> Custom recruitment campaigns</li>
+            </ul>
+            <a href="contact.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="col-md-4">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fa fa-chart-line"></i>
+            </div>
+            <h5>Career Guidance</h5>
+            <p>We provide professional career advice and resume optimization to help you stand out in the market.</p>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> Professional resume reviews</li>
+              <li><i class="fas fa-check"></i> Career path counseling</li>
+              <li><i class="fas fa-check"></i> Interview preparation</li>
+            </ul>
+            <a href="contact.html" class="service-link">Get Guidance <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="col-md-4">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fa fa-laptop-code"></i>
+            </div>
+            <h5>Skill Development</h5>
+            <p>Access premium online courses and certification programs to grow your skills and career potential.</p>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> Industry-recognized certifications</li>
+              <li><i class="fas fa-check"></i> Self-paced learning modules</li>
+              <li><i class="fas fa-check"></i> Expert-led workshops</li>
+            </ul>
+            <a href="#" class="service-link">Explore Courses <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="col-md-4">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fa fa-globe"></i>
+            </div>
+            <h5>Global Networking</h5>
+            <p>Join a community of professionals, employers, and recruiters from various industries around the world.</p>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> Industry-specific groups</li>
+              <li><i class="fas fa-check"></i> Virtual networking events</li>
+              <li><i class="fas fa-check"></i> Mentorship programs</li>
+            </ul>
+            <a href="#" class="service-link">Join Community <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="col-md-4">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fa fa-handshake"></i>
+            </div>
+            <h5>Business Partnerships</h5>
+            <p>Collaborate with our platform to grow your brand and access talent resources efficiently.</p>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> Brand visibility solutions</li>
+              <li><i class="fas fa-check"></i> Talent pipeline management</li>
+              <li><i class="fas fa-check"></i> Co-marketing opportunities</li>
+            </ul>
+            <a href="contact.html" class="service-link">Partner With Us <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-3 col-6 stat-item">
+          <div class="stat-number">10K+</div>
+          <div class="stat-text">Jobs Posted</div>
+        </div>
+        <div class="col-md-3 col-6 stat-item">
+          <div class="stat-number">50K+</div>
+          <div class="stat-text">Successful Hires</div>
+        </div>
+        <div class="col-md-3 col-6 stat-item">
+          <div class="stat-number">5K+</div>
+          <div class="stat-text">Partner Companies</div>
+        </div>
+        <div class="col-md-3 col-6 stat-item">
+          <div class="stat-number">98%</div>
+          <div class="stat-text">Satisfaction Rate</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing-section">
+    <div class="container">
+      <h2 class="section-title">Flexible Pricing Plans</h2>
+      <p class="section-subtitle">Choose the plan that works best for your needs. All plans include our core features with varying levels of access.</p>
+      
+      <div class="row justify-content-center">
+        <!-- Basic Plan -->
+        <div class="col-md-4 mb-4">
+          <div class="pricing-card">
+            <div class="pricing-header">
+              <h3 class="pricing-title">Basic</h3>
+              <div class="pricing-price">$0</div>
+              <div class="pricing-period">Free forever</div>
+            </div>
+            <ul class="pricing-features">
+              <li><i class="fas fa-check"></i> Access to job listings</li>
+              <li><i class="fas fa-check"></i> Basic resume upload</li>
+              <li><i class="fas fa-check"></i> 5 job applications/month</li>
+              <li><i class="fas fa-check"></i> Email notifications</li>
+              <li class="disabled"><i class="fas fa-times"></i> Advanced filters</li>
+              <li class="disabled"><i class="fas fa-times"></i> Priority support</li>
+            </ul>
+            <button class="btn btn-pricing">Get Started</button>
+          </div>
+        </div>
+        
+        <!-- Professional Plan -->
+        <div class="col-md-4 mb-4">
+          <div class="pricing-card featured">
+            <div class="pricing-badge">Most Popular</div>
+            <div class="pricing-header">
+              <h3 class="pricing-title">Professional</h3>
+              <div class="pricing-price">$19</div>
+              <div class="pricing-period">per month</div>
+            </div>
+            <ul class="pricing-features">
+              <li><i class="fas fa-check"></i> Unlimited job applications</li>
+              <li><i class="fas fa-check"></i> Advanced search filters</li>
+              <li><i class="fas fa-check"></i> Resume optimization</li>
+              <li><i class="fas fa-check"></i> Profile visibility boost</li>
+              <li><i class="fas fa-check"></i> Career guidance resources</li>
+              <li><i class="fas fa-check"></i> Priority application review</li>
+            </ul>
+            <button class="btn btn-pricing">Get Started</button>
+          </div>
+        </div>
+        
+        <!-- Enterprise Plan -->
+        <div class="col-md-4 mb-4">
+          <div class="pricing-card">
+            <div class="pricing-header">
+              <h3 class="pricing-title">Enterprise</h3>
+              <div class="pricing-price">$49</div>
+              <div class="pricing-period">per month</div>
+            </div>
+            <ul class="pricing-features">
+              <li><i class="fas fa-check"></i> All Professional features</li>
+              <li><i class="fas fa-check"></i> Dedicated career advisor</li>
+              <li><i class="fas fa-check"></i> Interview preparation</li>
+              <li><i class="fas fa-check"></i> Salary negotiation support</li>
+              <li><i class="fas fa-check"></i> LinkedIn profile optimization</li>
+              <li><i class="fas fa-check"></i> 24/7 premium support</li>
+            </ul>
+            <button class="btn btn-pricing">Get Started</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container cta-content">
+      <h2 class="fw-bold">Ready to Advance Your Career?</h2>
+      <p class="lead">Join thousands of professionals who have found their dream jobs through our platform.</p>
+      <a href="register.html" class="btn btn-light btn-lg me-3">Create Account</a>
+      <a href="contact.html" class="btn btn-outline-light btn-lg">Contact Sales</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <h5 class="fw-bold">Corp<span class="text-warning">Job</span></h5>
+          <p>Connecting talent with opportunity. Our platform helps job seekers find their dream careers and employers find the perfect candidates.</p>
+          <div class="social-icons mt-3">
+            <a href="https://facebook.com"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com"><i class="fab fa-twitter"></i></a>
+            <a href="https://linkedin.com"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://instagram.com"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="col-md-2 mb-4">
+          <h5 class="fw-bold">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="jobs.html">Jobs</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div class="col-md-2 mb-4">
+          <h5 class="fw-bold">Resources</h5>
+          <ul class="list-unstyled">
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h5 class="fw-bold">Subscribe to Our Newsletter</h5>
+          <p>Get the latest job alerts and career advice.</p>
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Your email address">
+            <button class="btn btn-warning" type="button">Subscribe</button>
+          </div>
+        </div>
+      </div>
+      <hr class="my-4">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <p class="mb-0">&copy; 2025 Corporate Job Portal | All Rights Reserved</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <a href="admin-dashboard.html" class="text-warning small">Admin Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

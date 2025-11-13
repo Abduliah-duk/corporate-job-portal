@@ -145,6 +145,7 @@
       background: var(--primary);
       color: white;
       border-color: var(--primary);
+      transform: translateY(-2px);
     }
 
     /* Portfolio Grid */
@@ -161,6 +162,7 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       transition: all 0.3s ease;
       position: relative;
+      cursor: pointer;
     }
 
     .portfolio-item:hover {
@@ -256,6 +258,12 @@
       padding: 30px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
       height: 100%;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
     }
 
     .testimonial-text {
@@ -384,6 +392,33 @@
       transform: translateY(-5px);
     }
 
+    /* Alert Styles */
+    .alert-custom {
+      border-radius: 10px;
+      border: none;
+      padding: 12px 15px;
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      z-index: 1000;
+      max-width: 400px;
+    }
+
+    /* Modal Styles */
+    .portfolio-modal .modal-content {
+      border-radius: 15px;
+      border: none;
+    }
+
+    .portfolio-modal .modal-header {
+      border-bottom: 1px solid #e1e5ee;
+      padding: 20px 30px;
+    }
+
+    .portfolio-modal .modal-body {
+      padding: 30px;
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .portfolio-grid {
@@ -398,32 +433,41 @@
         padding: 6px 15px;
         font-size: 0.9rem;
       }
+
+      .alert-custom {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- Alert Container -->
+  <div id="alertContainer"></div>
+
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-      <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
-        <img src="images/images:logo.png" alt="Logo" width="45" class="me-2" />
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html" id="homeLink">
+        <img src="images/images.logo.png" alt="Logo" width="45" class="me-2" />
         <span>Corp<span class="text-warning">Job</span></span>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" id="navbarToggle">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto fw-semibold">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-          <li class="nav-item"><a class="nav-link" href="jobs.html">Jobs</a></li>
-          <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-          <li class="nav-item"><a class="nav-link active" href="portfolio.html">Portfolio</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html" id="navHome">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html" id="navServices">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="jobs.html" id="navJobs">Jobs</a></li>
+          <li class="nav-item"><a class="nav-link" href="blog.html" id="navBlog">Blog</a></li>
+          <li class="nav-item"><a class="nav-link active" href="portfolio.html" id="navPortfolio">Portfolio</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html" id="navContact">Contact</a></li>
           <li class="nav-item">
-            <a class="btn btn-outline-warning btn-sm ms-lg-3" href="login.html">
+            <a class="btn btn-outline-warning btn-sm ms-lg-3" href="login.html" id="loginBtn">
               <i class="fa fa-user"></i> Login
             </a>
           </li>
@@ -440,78 +484,78 @@
       
       <!-- Portfolio Filter -->
       <div class="portfolio-filter">
-        <button class="filter-btn active" data-filter="all">All Projects</button>
-        <button class="filter-btn" data-filter="web">Web Development</button>
-        <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
-        <button class="filter-btn" data-filter="design">UI/UX Design</button>
-        <button class="filter-btn" data-filter="consulting">Consulting</button>
+        <button class="filter-btn active" data-filter="all" id="filterAll">All Projects</button>
+        <button class="filter-btn" data-filter="web" id="filterWeb">Web Development</button>
+        <button class="filter-btn" data-filter="mobile" id="filterMobile">Mobile Apps</button>
+        <button class="filter-btn" data-filter="design" id="filterDesign">UI/UX Design</button>
+        <button class="filter-btn" data-filter="consulting" id="filterConsulting">Consulting</button>
       </div>
       
       <!-- Portfolio Grid -->
       <div class="portfolio-grid">
         <!-- Portfolio Item 1 -->
-        <div class="portfolio-item" data-category="web">
+        <div class="portfolio-item" data-category="web" id="portfolio1">
           <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Corporate Website" class="portfolio-img">
           <div class="portfolio-content">
             <span class="portfolio-category">Web Development</span>
             <h3 class="portfolio-title">Corporate Career Portal</h3>
             <p class="portfolio-description">A comprehensive job portal for a Fortune 500 company with advanced filtering and application tracking.</p>
-            <a href="#" class="portfolio-link">View Case Study <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="portfolio-link view-case-study" data-project="1">View Case Study <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
         
         <!-- Portfolio Item 2 -->
-        <div class="portfolio-item" data-category="mobile">
-          <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Job Search App" class="portfolio-img">
+        <div class="portfolio-item" data-category="mobile" id="portfolio2">
+          <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Job Search App" class="portfolio-img">
           <div class="portfolio-content">
             <span class="portfolio-category">Mobile App</span>
             <h3 class="portfolio-title">Job Search Mobile Application</h3>
             <p class="portfolio-description">A native mobile app that helps job seekers find opportunities and apply directly from their phones.</p>
-            <a href="#" class="portfolio-link">View Case Study <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="portfolio-link view-case-study" data-project="2">View Case Study <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
         
         <!-- Portfolio Item 3 -->
-        <div class="portfolio-item" data-category="design">
-          <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="UI/UX Design" class="portfolio-img">
+        <div class="portfolio-item" data-category="design" id="portfolio3">
+          <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" alt="UI/UX Design" class="portfolio-img">
           <div class="portfolio-content">
             <span class="portfolio-category">UI/UX Design</span>
             <h3 class="portfolio-title">Recruitment Platform Redesign</h3>
             <p class="portfolio-description">Complete redesign of a recruitment platform focusing on user experience and conversion optimization.</p>
-            <a href="#" class="portfolio-link">View Case Study <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="portfolio-link view-case-study" data-project="3">View Case Study <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
         
         <!-- Portfolio Item 4 -->
-        <div class="portfolio-item" data-category="consulting">
-          <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="HR Consulting" class="portfolio-img">
+        <div class="portfolio-item" data-category="consulting" id="portfolio4">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="HR Consulting" class="portfolio-img">
           <div class="portfolio-content">
             <span class="portfolio-category">Consulting</span>
             <h3 class="portfolio-title">HR Process Optimization</h3>
             <p class="portfolio-description">Streamlined hiring processes for a tech startup, reducing time-to-hire by 40%.</p>
-            <a href="#" class="portfolio-link">View Case Study <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="portfolio-link view-case-study" data-project="4">View Case Study <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
         
         <!-- Portfolio Item 5 -->
-        <div class="portfolio-item" data-category="web">
-          <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="API Integration" class="portfolio-img">
+        <div class="portfolio-item" data-category="web" id="portfolio5">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="API Integration" class="portfolio-img">
           <div class="portfolio-content">
             <span class="portfolio-category">Web Development</span>
             <h3 class="portfolio-title">Job Board API Integration</h3>
             <p class="portfolio-description">Integrated multiple job board APIs to create a unified platform for a staffing agency.</p>
-            <a href="#" class="portfolio-link">View Case Study <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="portfolio-link view-case-study" data-project="5">View Case Study <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
         
         <!-- Portfolio Item 6 -->
-        <div class="portfolio-item" data-category="design">
-          <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Brand Identity" class="portfolio-img">
+        <div class="portfolio-item" data-category="design" id="portfolio6">
+          <img src="https://images.unsplash.com/photo-1565688534245-05d6b5be184a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Brand Identity" class="portfolio-img">
           <div class="portfolio-content">
             <span class="portfolio-category">UI/UX Design</span>
             <h3 class="portfolio-title">Recruitment Agency Branding</h3>
             <p class="portfolio-description">Complete brand identity and website design for a specialized recruitment agency.</p>
-            <a href="#" class="portfolio-link">View Case Study <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="portfolio-link view-case-study" data-project="6">View Case Study <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -522,19 +566,19 @@
   <section class="stats-section">
     <div class="container">
       <div class="row text-center">
-        <div class="col-md-3 col-6 stat-item">
+        <div class="col-md-3 col-6 stat-item" id="statProjects">
           <div class="stat-number">150+</div>
           <div class="stat-text">Projects Completed</div>
         </div>
-        <div class="col-md-3 col-6 stat-item">
+        <div class="col-md-3 col-6 stat-item" id="statSatisfaction">
           <div class="stat-number">98%</div>
           <div class="stat-text">Client Satisfaction</div>
         </div>
-        <div class="col-md-3 col-6 stat-item">
+        <div class="col-md-3 col-6 stat-item" id="statTeam">
           <div class="stat-number">50+</div>
           <div class="stat-text">Team Members</div>
         </div>
-        <div class="col-md-3 col-6 stat-item">
+        <div class="col-md-3 col-6 stat-item" id="statExperience">
           <div class="stat-number">5+</div>
           <div class="stat-text">Years Experience</div>
         </div>
@@ -548,7 +592,7 @@
       <h2 class="section-title">Client Testimonials</h2>
       <div class="row g-4">
         <div class="col-md-4">
-          <div class="testimonial-card">
+          <div class="testimonial-card" id="testimonial1">
             <div class="testimonial-text">
               "The team at CorpJob transformed our recruitment process. We've seen a 60% increase in qualified applicants since implementing their platform."
             </div>
@@ -564,7 +608,7 @@
           </div>
         </div>
         <div class="col-md-4">
-          <div class="testimonial-card">
+          <div class="testimonial-card" id="testimonial2">
             <div class="testimonial-text">
               "Their mobile app development exceeded our expectations. The user experience is seamless, and our candidate engagement has doubled."
             </div>
@@ -580,7 +624,7 @@
           </div>
         </div>
         <div class="col-md-4">
-          <div class="testimonial-card">
+          <div class="testimonial-card" id="testimonial3">
             <div class="testimonial-text">
               "The consulting services helped us optimize our hiring workflow. We've reduced our time-to-hire by 45% while improving candidate quality."
             </div>
@@ -604,7 +648,7 @@
     <div class="container cta-content">
       <h2 class="fw-bold">Ready to Start Your Project?</h2>
       <p class="lead">Let's discuss how we can help transform your recruitment process or build your next career platform.</p>
-      <a href="contact.html" class="btn btn-light btn-lg">Get In Touch</a>
+      <button class="btn btn-light btn-lg" id="ctaButton">Get In Touch</button>
     </div>
   </section>
 
@@ -616,36 +660,36 @@
           <h5 class="fw-bold">Corp<span class="text-warning">Job</span></h5>
           <p>Connecting talent with opportunity. Our platform helps job seekers find their dream careers and employers find the perfect candidates.</p>
           <div class="social-icons mt-3">
-            <a href="https://facebook.com"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://twitter.com"><i class="fab fa-twitter"></i></a>
-            <a href="https://linkedin.com"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://instagram.com"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com" id="facebookLink"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com" id="twitterLink"><i class="fab fa-twitter"></i></a>
+            <a href="https://linkedin.com" id="linkedinLink"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://instagram.com" id="instagramLink"><i class="fab fa-instagram"></i></a>
           </div>
         </div>
         <div class="col-md-2 mb-4">
           <h5 class="fw-bold">Quick Links</h5>
           <ul class="list-unstyled">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="jobs.html">Jobs</a></li>
-            <li><a href="blog.html">Blog</a></li>
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="services.html" class="footer-link">Services</a></li>
+            <li><a href="jobs.html" class="footer-link">Jobs</a></li>
+            <li><a href="blog.html" class="footer-link">Blog</a></li>
           </ul>
         </div>
         <div class="col-md-2 mb-4">
           <h5 class="fw-bold">Resources</h5>
           <ul class="list-unstyled">
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="terms.html">Terms of Service</a></li>
-            <li><a href="privacy.html">Privacy Policy</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="faq.html" class="footer-link">FAQ</a></li>
+            <li><a href="terms.html" class="footer-link">Terms of Service</a></li>
+            <li><a href="privacy.html" class="footer-link">Privacy Policy</a></li>
+            <li><a href="contact.html" class="footer-link">Contact Us</a></li>
           </ul>
         </div>
         <div class="col-md-4 mb-4">
           <h5 class="fw-bold">Subscribe to Our Newsletter</h5>
           <p>Get the latest updates on our projects and industry insights.</p>
           <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Your email address">
-            <button class="btn btn-warning" type="button">Subscribe</button>
+            <input type="email" class="form-control" placeholder="Your email address" id="newsletterEmail">
+            <button class="btn btn-warning" type="button" id="subscribeBtn">Subscribe</button>
           </div>
         </div>
       </div>
@@ -655,17 +699,55 @@
           <p class="mb-0">&copy; 2025 Corporate Job Portal | All Rights Reserved</p>
         </div>
         <div class="col-md-6 text-md-end">
-          <a href="admin-dashboard.html" class="text-warning small">Admin Login</a>
+          <a href="admin-dashboard.html" class="text-warning small" id="adminLink">Admin Login</a>
         </div>
       </div>
     </div>
   </footer>
 
+  <!-- Portfolio Modal -->
+  <div class="modal fade portfolio-modal" id="portfolioModal" tabindex="-1" aria-labelledby="portfolioModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="portfolioModalLabel">Project Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="modalContent">
+            <!-- Modal content will be loaded here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    // Portfolio Filter
+    // Show alert function
+    function showAlert(message, type = 'info') {
+      const alertContainer = document.getElementById('alertContainer');
+      const alertId = 'alert-' + Date.now();
+      
+      alertContainer.innerHTML = `
+        <div class="alert alert-${type} alert-custom alert-dismissible fade show" id="${alertId}" role="alert">
+          ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      `;
+      
+      // Auto remove alert after 5 seconds
+      setTimeout(() => {
+        const alert = document.getElementById(alertId);
+        if (alert) {
+          alert.remove();
+        }
+      }, 5000);
+    }
+
+    // Portfolio Filter Functionality
     document.querySelectorAll('.filter-btn').forEach(button => {
       button.addEventListener('click', function() {
         // Update active button
@@ -674,8 +756,11 @@
         });
         this.classList.add('active');
         
-        // Filter portfolio items
+        // Show filter selection
         const filter = this.getAttribute('data-filter');
+        showAlert(`Showing ${filter === 'all' ? 'all projects' : filter + ' projects'}`);
+        
+        // Filter portfolio items
         const portfolioItems = document.querySelectorAll('.portfolio-item');
         
         portfolioItems.forEach(item => {
@@ -685,6 +770,198 @@
             item.style.display = 'none';
           }
         });
+      });
+    });
+
+    // Portfolio Item Click Functionality
+    document.querySelectorAll('.portfolio-item').forEach(item => {
+      item.addEventListener('click', function() {
+        const title = this.querySelector('.portfolio-title').textContent;
+        const category = this.querySelector('.portfolio-category').textContent;
+        const description = this.querySelector('.portfolio-description').textContent;
+        const imgSrc = this.querySelector('.portfolio-img').src;
+        
+        // Set modal content
+        document.getElementById('portfolioModalLabel').textContent = title;
+        document.getElementById('modalContent').innerHTML = `
+          <div class="row">
+            <div class="col-md-6">
+              <img src="${imgSrc}" alt="${title}" class="img-fluid rounded mb-3">
+            </div>
+            <div class="col-md-6">
+              <span class="portfolio-category">${category}</span>
+              <h4 class="mt-2">${title}</h4>
+              <p>${description}</p>
+              <h5>Project Details</h5>
+              <p>This project involved creating a comprehensive solution for our client. We utilized cutting-edge technologies and followed industry best practices to deliver outstanding results.</p>
+              <h5>Technologies Used</h5>
+              <ul>
+                <li>HTML5, CSS3, JavaScript</li>
+                <li>React.js / Vue.js</li>
+                <li>Node.js / Express</li>
+                <li>MongoDB / PostgreSQL</li>
+              </ul>
+              <div class="mt-4">
+                <button class="btn btn-primary">View Live Project</button>
+                <button class="btn btn-outline-primary ms-2">Download Case Study</button>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        // Show modal
+        const portfolioModal = new bootstrap.Modal(document.getElementById('portfolioModal'));
+        portfolioModal.show();
+      });
+    });
+
+    // Case Study Links
+    document.querySelectorAll('.view-case-study').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation(); // Prevent triggering the portfolio item click
+        const projectId = this.getAttribute('data-project');
+        showAlert(`Loading case study for project ${projectId}...`, 'info');
+        
+        // Simulate loading case study
+        setTimeout(() => {
+          showAlert(`Case study loaded successfully!`, 'success');
+        }, 1500);
+      });
+    });
+
+    // Testimonial Cards
+    document.querySelectorAll('.testimonial-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const author = this.querySelector('h5').textContent;
+        const company = this.querySelector('p').textContent;
+        showAlert(`Testimonial from ${author} at ${company}`, 'info');
+      });
+    });
+
+    // Stats Section Items
+    document.querySelectorAll('.stat-item').forEach(stat => {
+      stat.addEventListener('click', function() {
+        const number = this.querySelector('.stat-number').textContent;
+        const text = this.querySelector('.stat-text').textContent;
+        showAlert(`${number} ${text} - Clicked!`, 'info');
+      });
+    });
+
+    // CTA Button
+    document.getElementById('ctaButton').addEventListener('click', function() {
+      showAlert('Redirecting to contact form...', 'info');
+      setTimeout(() => {
+        // In a real application, this would redirect to contact page
+        // window.location.href = 'contact.html';
+        showAlert('Contact form opened successfully!', 'success');
+      }, 1000);
+    });
+
+    // Social Media Links
+    document.getElementById('facebookLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      showAlert('Opening Facebook page...', 'info');
+    });
+
+    document.getElementById('twitterLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      showAlert('Opening Twitter profile...', 'info');
+    });
+
+    document.getElementById('linkedinLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      showAlert('Opening LinkedIn profile...', 'info');
+    });
+
+    document.getElementById('instagramLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      showAlert('Opening Instagram profile...', 'info');
+    });
+
+    // Footer Links
+    document.querySelectorAll('.footer-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const page = this.textContent;
+        showAlert(`Navigating to ${page} page...`, 'info');
+        
+        // In a real application, this would redirect to the actual page
+        // window.location.href = this.getAttribute('href');
+      });
+    });
+
+    // Newsletter Subscription
+    document.getElementById('subscribeBtn').addEventListener('click', function() {
+      const email = document.getElementById('newsletterEmail').value;
+      if (email) {
+        if (validateEmail(email)) {
+          showAlert(`Thank you for subscribing with: ${email}`, 'success');
+          document.getElementById('newsletterEmail').value = '';
+        } else {
+          showAlert('Please enter a valid email address.', 'warning');
+        }
+      } else {
+        showAlert('Please enter your email address to subscribe.', 'warning');
+      }
+    });
+
+    // Email validation function
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+
+    // Admin Link
+    document.getElementById('adminLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      showAlert('Redirecting to admin dashboard...', 'info');
+      // In a real application: window.location.href = 'admin-dashboard.html';
+    });
+
+    // Navbar Links
+    document.getElementById('homeLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      showAlert('Returning to homepage...', 'info');
+      // In a real application: window.location.href = 'index.html';
+    });
+
+    document.getElementById('loginBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      showAlert('Redirecting to login page...', 'info');
+      // In a real application: window.location.href = 'login.html';
+    });
+
+    // Navbar toggle for mobile
+    document.getElementById('navbarToggle').addEventListener('click', function() {
+      showAlert('Mobile menu toggled', 'info');
+    });
+
+    // Add keyboard navigation support
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        // Close any open modals or clear alerts
+        const alerts = document.querySelectorAll('.alert-custom');
+        alerts.forEach(alert => alert.remove());
+      }
+    });
+
+    // Initialize with a welcome message
+    window.addEventListener('load', function() {
+      showAlert('Welcome to our Portfolio page! Explore our projects and success stories.', 'success');
+      
+      // Animate stats on scroll
+      const statItems = document.querySelectorAll('.stat-item');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      statItems.forEach(item => {
+        observer.observe(item);
       });
     });
   </script>

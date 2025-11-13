@@ -464,7 +464,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
       <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
-        <img src="images/images:logo.png" width="45" class="me-2" alt="Logo" />
+        <img src="images/images.logo.png" width="45" class="me-2" alt="Logo" />
         <span>Corp<span class="text-warning">Job</span></span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -560,7 +560,7 @@
               <li><i class="fas fa-check"></i> Self-paced learning modules</li>
               <li><i class="fas fa-check"></i> Expert-led workshops</li>
             </ul>
-            <a href="#" class="service-link">Explore Courses <i class="fas fa-arrow-right"></i></a>
+            <button class="service-link explore-courses-btn">Explore Courses <i class="fas fa-arrow-right"></i></button>
           </div>
         </div>
 
@@ -577,7 +577,7 @@
               <li><i class="fas fa-check"></i> Virtual networking events</li>
               <li><i class="fas fa-check"></i> Mentorship programs</li>
             </ul>
-            <a href="#" class="service-link">Join Community <i class="fas fa-arrow-right"></i></a>
+            <button class="service-link join-community-btn">Join Community <i class="fas fa-arrow-right"></i></button>
           </div>
         </div>
 
@@ -648,7 +648,7 @@
               <li class="disabled"><i class="fas fa-times"></i> Advanced filters</li>
               <li class="disabled"><i class="fas fa-times"></i> Priority support</li>
             </ul>
-            <button class="btn btn-pricing">Get Started</button>
+            <button class="btn btn-pricing basic-plan-btn">Get Started</button>
           </div>
         </div>
         
@@ -669,7 +669,7 @@
               <li><i class="fas fa-check"></i> Career guidance resources</li>
               <li><i class="fas fa-check"></i> Priority application review</li>
             </ul>
-            <button class="btn btn-pricing">Get Started</button>
+            <button class="btn btn-pricing professional-plan-btn">Get Started</button>
           </div>
         </div>
         
@@ -689,7 +689,7 @@
               <li><i class="fas fa-check"></i> LinkedIn profile optimization</li>
               <li><i class="fas fa-check"></i> 24/7 premium support</li>
             </ul>
-            <button class="btn btn-pricing">Get Started</button>
+            <button class="btn btn-pricing enterprise-plan-btn">Get Started</button>
           </div>
         </div>
       </div>
@@ -701,8 +701,8 @@
     <div class="container cta-content">
       <h2 class="fw-bold">Ready to Advance Your Career?</h2>
       <p class="lead">Join thousands of professionals who have found their dream jobs through our platform.</p>
-      <a href="register.html" class="btn btn-light btn-lg me-3">Create Account</a>
-      <a href="contact.html" class="btn btn-outline-light btn-lg">Contact Sales</a>
+      <button class="btn btn-light btn-lg me-3 create-account-btn">Create Account</button>
+      <button class="btn btn-outline-light btn-lg contact-sales-btn">Contact Sales</button>
     </div>
   </section>
 
@@ -742,8 +742,8 @@
           <h5 class="fw-bold">Subscribe to Our Newsletter</h5>
           <p>Get the latest job alerts and career advice.</p>
           <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Your email address">
-            <button class="btn btn-warning" type="button">Subscribe</button>
+            <input type="email" class="form-control" placeholder="Your email address" id="newsletter-email">
+            <button class="btn btn-warning" type="button" id="subscribe-btn">Subscribe</button>
           </div>
         </div>
       </div>
@@ -761,5 +761,74 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Service buttons functionality
+    document.querySelector('.explore-courses-btn').addEventListener('click', function() {
+      alert('Course catalog is coming soon! We are preparing a comprehensive list of professional development courses to help you advance your career.');
+    });
+
+    document.querySelector('.join-community-btn').addEventListener('click', function() {
+      alert('Community registration is coming soon! Join our professional network to connect with industry experts and peers.');
+    });
+
+    // Pricing plan buttons functionality
+    document.querySelector('.basic-plan-btn').addEventListener('click', function() {
+      alert('Basic plan selected! You now have access to our free job listings and basic features.');
+    });
+
+    document.querySelector('.professional-plan-btn').addEventListener('click', function() {
+      alert('Professional plan selected! You now have unlimited access to all our premium features for $19/month.');
+    });
+
+    document.querySelector('.enterprise-plan-btn').addEventListener('click', function() {
+      alert('Enterprise plan selected! You now have access to our premium features including dedicated career advisor for $49/month.');
+    });
+
+    // CTA buttons functionality
+    document.querySelector('.create-account-btn').addEventListener('click', function() {
+      alert('Redirecting to registration page...');
+      // In a real application, this would redirect to the registration page
+      // window.location.href = 'register.html';
+    });
+
+    document.querySelector('.contact-sales-btn').addEventListener('click', function() {
+      alert('Redirecting to contact page...');
+      // In a real application, this would redirect to the contact page
+      // window.location.href = 'contact.html';
+    });
+
+    // Newsletter subscription functionality
+    document.querySelector('#subscribe-btn').addEventListener('click', function() {
+      const email = document.querySelector('#newsletter-email').value;
+      if (email) {
+        if (validateEmail(email)) {
+          alert('Thank you for subscribing to our newsletter! You will receive job alerts and career tips in your inbox.');
+          document.querySelector('#newsletter-email').value = '';
+        } else {
+          alert('Please enter a valid email address.');
+        }
+      } else {
+        alert('Please enter your email address to subscribe.');
+      }
+    });
+
+    // Email validation function
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+
+    // Social media links functionality
+    document.querySelectorAll('.social-icons a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const platform = this.querySelector('i').className.split(' ')[1].split('-')[1];
+        alert(`Opening our ${platform} page in a new window...`);
+        // In a real application, this would open the actual social media page
+        // window.open(this.href, '_blank');
+      });
+    });
+  </script>
 </body>
 </html>
